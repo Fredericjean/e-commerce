@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\BackEnd;
+namespace App\Controller\Backend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,4 +16,7 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
+
+    
 }
+
