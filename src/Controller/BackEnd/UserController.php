@@ -29,13 +29,13 @@ class UserController extends AbstractController
         ]);
     }
     #[Route('/{id}/update', name: '.update', methods: ['GET', 'POST'])]
-    public function update(?User $user, Request $request): Response
+    public function update(?User $user, Request $request): Response | RedirectResponse
     {
         if (!$user) {
             $this->addFlash('error', 'Utilisateur non trouvé');
+
             return $this->redirectToRoute('admin.users.index');
         }
-
         $form = $this->createForm(UserType::class, $user, ['isAdmin' => true]);
         $form->handleRequest($request);
 
@@ -48,7 +48,7 @@ class UserController extends AbstractController
         }
 
         return $this->render("Backend/Users/update.html.twig", [
-            'form' => $form->createView(),
+            'form' => $form,
         ]);
     }
 
@@ -61,7 +61,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('admin.users.index');
         }
 
-        if ($this->isCsrfTokenValid('delete' .$user->getId(), $request->request->get('token')))
+        if ($this->isCsrfTokenValid('delete', $user->getId(), $request->request->get('token')))
         {
             $this->em->remove($user);
             $this->em->flush();
