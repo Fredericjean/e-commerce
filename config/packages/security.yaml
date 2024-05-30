@@ -17,8 +17,10 @@ security:
             lazy: true
             provider: app_user_provider
             form_login:
+                enable_csrf: true
                 login_path: app.login
                 check_path: app.login
+                default_target_path: app.home
             logout:
                 path: /logout
                 target: /

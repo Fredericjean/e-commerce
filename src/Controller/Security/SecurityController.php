@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -20,7 +20,7 @@ class SecurityController extends AbstractController
         $error= $authenticationUtils ->getLastAuthenticationError();
         $lastUserName= $authenticationUtils ->getLastUsername();
 
-        return $this->render('security/login.html.twig', [
+        return $this->render('Security/login.html.twig', [
             'lastUsername' => $lastUserName,
             'error' =>$error,
         ]);
@@ -28,7 +28,7 @@ class SecurityController extends AbstractController
     
     
     #[Route('register', name:'app.register')]
-    public function register(Request $request, UserPasswordHasher $hasher, EntityManagerInterface $em ): Response 
+    public function register(Request $request, UserPasswordHasherInterface $hasher, EntityManagerInterface $em ): Response 
     {
         $user = new User();
 
@@ -49,5 +49,7 @@ class SecurityController extends AbstractController
         return $this->render('Security/register.html.twig', [
             'form' => $form, ]);
     }
+
+    
 
 }

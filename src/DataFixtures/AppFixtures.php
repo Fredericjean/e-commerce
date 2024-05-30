@@ -24,7 +24,7 @@ class AppFixtures extends Fixture
         $user->setFirstName('Pierre')
             ->setLastName('Bertrand')
             ->setTelephone('0606060606')
-            ->setEmail('pierre@example.com')
+            ->setEmail('admin@test.com')
             ->setPassword(
                 $this->hasher->hashPassword($user, 'Test1234')
             ) // Nous devons hasher le password

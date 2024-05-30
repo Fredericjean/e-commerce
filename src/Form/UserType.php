@@ -28,21 +28,13 @@ class UserType extends AbstractType
                 ],
                 'required' => true,
             ])
-            ->add('roles', ChoiceType::class, [
-                'label' => 'Roles',
-                'choices' => [
-                    'Administrateur' => 'ROLE_ADMIN',
-                    'Utilisateur' => 'ROLE_USER',
-                ],
-            ])
-
             ->add(
                 'password',
                 RepeatedType::class,
                 [
                     'type' => PasswordType::class,
                     'invalid_message' => 'Les mots de passe doivent être identiques',
-                    'first-options' => [
+                    'first_options' => [
                         'label' => "Mot de passe pss: essaie 'Test12345'",
                         'attr' => [
                             "placeholder" => "Test12345",
@@ -58,7 +50,7 @@ class UserType extends AbstractType
                             ]),
                         ],
                     ],
-                    'second-options' => [
+                    'second_options' => [
                         'label' => 'Confirmation',
                         'attr' => [
                             "placeholder" => "Test12345",
@@ -92,6 +84,13 @@ class UserType extends AbstractType
                     ],
                     'expanded'=>true,
                     'multiple'=>true,
+                ])
+                ->add('roles', ChoiceType::class, [
+                    'label' => 'Roles',
+                    'choices' => [
+                        'Administrateur' => 'ROLE_ADMIN',
+                        'Utilisateur' => 'ROLE_USER',
+                    ],
                 ]);
             }
     }
