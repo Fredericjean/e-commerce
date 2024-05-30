@@ -1,16 +1,11 @@
-body {
-    background-color: lightgray;
-}
+@import "abstracts/variables";
+@import "abstracts/mixins";
 
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
-@import "~bootstrap/scss/variables-dark";
-@import "~bootstrap/scss/maps";
-@import "~bootstrap/scss/mixins";
-@import "~bootstrap/scss/bootstrap-reboot";
-@import "~bootstrap/scss/dropdown";
-@import "~bootstrap/scss/alert";
-@import "~bootstrap/scss/pagination";
 
-// Form
-@import "~bootstrap/scss/forms";
+// Import Vendors! Attention importer boostrap à ce moment
+@import "vendors/bootstrap";
+
+@import "base/base";
+@import "base/typography";
+
+@import "components/header";
