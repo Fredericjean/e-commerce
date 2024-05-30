@@ -20,7 +20,7 @@ security:
                 enable_csrf: true
                 login_path: app.login
                 check_path: app.login
-                default_target_path: app.home
+                default_target_path: app.post_login
             logout:
                 path: /logout
                 target: /
