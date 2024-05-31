@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-#[Route('/admin/users', name: 'admin.users')]
+#[Route('/admin/users', name: 'app.admin.users')]
 class UserController extends AbstractController
 {
     public function __construct(
@@ -61,7 +61,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('admin.users.index');
         }
 
-        if ($this->isCsrfTokenValid('delete', $user->getId(), $request->request->get('token')))
+        if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('token')))
         {
             $this->em->remove($user);
             $this->em->flush();

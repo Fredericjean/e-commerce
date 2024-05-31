@@ -32,7 +32,7 @@
                     <div class="col-auto">
                         <ul class="navbar-nav ml-auto navbar-icons">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{path('app.login')}}">
+                                <a class="nav-link" href="{{ path('app.login') }}">
                                     <i class="bi bi-person"></i>
                                 </a>
                             </li>
@@ -47,14 +47,23 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <button id="burger-btn" class="nav-link btn btn-link">
                                     <i class="bi bi-list"></i>
-                                </a>
+                                </button>
                             </li>
                         </ul>
                     </div>
                 </nav>
             </div>
         </div>
+    </div>
+
+    <div id="burger-menu" class="burger-menu" {{ stimulus_controller('menuBurger') }}>
+        <button class="close-btn">&times;</button>
+        <ul>
+            <li><a href="{{path ('app.admin.users.index')}}">Users</a></li>
+            <li><a href="#">Products</a></li>
+            <li><a href="{{path ('app.admin.genders.index')}}">Gender</a></li>
+        </ul>
     </div>
 </header>
