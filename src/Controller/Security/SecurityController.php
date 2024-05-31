@@ -29,7 +29,7 @@ class SecurityController extends AbstractController
     public function postLogin(): Response
     {
         if ($this->isGranted('ROLE_ADMIN')) {
-            return $this->redirectToRoute('admin.users.index');
+            return $this->redirectToRoute('app.admin.users.index');
         } else {
             return $this->redirectToRoute('frontend.home');
         }
