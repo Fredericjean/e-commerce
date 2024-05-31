@@ -4,6 +4,7 @@ namespace App\DataFixtures;
 
 use DateTime;
 use App\Entity\User;
+use App\Entity\Gender;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -32,6 +33,15 @@ class AppFixtures extends Fixture
             ->setBirthDate(new DateTime('2000/02/02'));
 
         $manager->persist($user);
+        
+
+        $genders = ['Homme', 'Femme', 'Enfant', 'Adolescent'];
+        foreach ($genders as $genderName){
+            $gender = new Gender;
+            $gender->setName($genderName);
+            $gender->setEnable(true);
+            $manager->persist($gender);
+        }
         $manager->flush();
     }
 }
