@@ -36,16 +36,18 @@ class GenderController extends AbstractController
     {
         if (!$gender) {
             $this->addFlash('error', 'Genre pas trouvé');
+           
             return $this->redirectToRoute('app.admin.genders.index');
         }
 
-        $form = $this->createForm(GenderType::class, $gender, ['isAdmin' => true]);
+        $form = $this->createForm(GenderType::class, $gender);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($gender);
             $this->em->flush();
             $this->addFlash('success', 'Genre modifié avec succès');
+           
             return $this->redirectToRoute('app.admin.genders.index');
         }
 
@@ -59,6 +61,7 @@ class GenderController extends AbstractController
     {
         if (!$gender) {
             $this->addFlash('error', 'Genre pas trouvé');
+           
             return $this->redirectToRoute('app.admin.genders.index');
         }
 
@@ -69,6 +72,7 @@ class GenderController extends AbstractController
         } else {
             $this->addFlash('error', 'Token invalide');
         }
+        
         return $this->redirectToRoute('app.admin.genders.index');
     }
 
@@ -84,8 +88,10 @@ class GenderController extends AbstractController
             $this->em->persist($gender);
             $this->em->flush();
             $this->addFlash('success', 'Genre créé avec succès');
-            return $this->redirectToRoute('admin.gender.index');
+           
+            return $this->redirectToRoute('app.admin.genders.index');
         }
+       
         return $this->render('Backend/Genders/create.html.twig', [
             'form'=>$form]);
 

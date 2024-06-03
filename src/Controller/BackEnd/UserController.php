@@ -34,7 +34,7 @@ class UserController extends AbstractController
         if (!$user) {
             $this->addFlash('error', 'Utilisateur non trouvé');
 
-            return $this->redirectToRoute('admin.users.index');
+            return $this->redirectToRoute('app.admin.users.index');
         }
         $form = $this->createForm(UserType::class, $user, ['isAdmin' => true]);
         $form->handleRequest($request);
@@ -44,7 +44,7 @@ class UserController extends AbstractController
             $this->em->flush();
 
             $this->addFlash('success', 'Utilisateur modifié avec succès');
-            return $this->redirectToRoute('admin.users.index');
+            return $this->redirectToRoute('app.admin.users.index');
         }
 
         return $this->render("Backend/Users/update.html.twig", [
@@ -58,7 +58,7 @@ class UserController extends AbstractController
         if (!$user)
         {
             $this->addFlash('error', 'Utilisateur non trouvé');
-            return $this->redirectToRoute('admin.users.index');
+            return $this->redirectToRoute('app.admin.users.index');
         }
 
         if ($this->isCsrfTokenValid('delete'.$user->getId(), $request->request->get('token')))
@@ -70,6 +70,6 @@ class UserController extends AbstractController
         {
             $this->addFlash('error', 'Token CSRF invalide');
         }
-        return $this->redirectToRoute('admin.users.index');
+        return $this->redirectToRoute('app.admin.users.index');
     }
 }

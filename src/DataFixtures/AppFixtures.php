@@ -4,7 +4,9 @@ namespace App\DataFixtures;
 
 use DateTime;
 use App\Entity\User;
+use App\Entity\Model;
 use App\Entity\Gender;
+use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -41,6 +43,15 @@ class AppFixtures extends Fixture
             $gender->setName($genderName);
             $gender->setEnable(true);
             $manager->persist($gender);
+        }
+
+        $models = ['Adidas Campus', 'Air Jordan 4', 'Nike Dunk Low', 'Jordan Jumpman'];
+        foreach ($models as $modelName) {
+            $model = new Model();
+            $model->setName($modelName);
+            $model->setCreatedAt(new DateTime());
+            $model->setEnable(true);
+            $manager->persist($model);
         }
         $manager->flush();
     }
