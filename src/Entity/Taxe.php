@@ -8,6 +8,7 @@ use App\Repository\TaxeRepository;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: TaxeRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Taxe
 {
     use EnableTrait;

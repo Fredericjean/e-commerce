@@ -47,12 +47,12 @@ class TaxeController extends AbstractController
     }
 
     #[Route('/{id}/update', name:'.update', methods :['GET','POST'])]
-    public function update(Request $request, Taxe $taxe): Response | RedirectResponse 
+    public function update(Request $request, ?Taxe $taxe): Response | RedirectResponse 
     {
         if(!$taxe)
         {
-            return $this->redirectToRoute('app.admin.taxes.index');
             $this->addFlash('error','Problème dans la recherche de taxes');
+            return $this->redirectToRoute('app.admin.taxes.index');
         }
 
         $form = $this->createForm(TaxeType::class, $taxe);

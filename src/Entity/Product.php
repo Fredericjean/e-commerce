@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Gedmo\Mapping\Annotation as Gedmo;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Product
 {
     #[ORM\Id]
@@ -47,6 +48,10 @@ class Product
     #[ORM\Column(nullable: true)]
     #[Gedmo\Timestampable(on: 'update')]
     private ?\DateTimeImmutable $updated_at = null;
+
+    #[ORM\ManyToOne(inversedBy: 'product')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Model $model = null;
 
     public function getId(): ?int
     {
@@ -133,6 +138,18 @@ class Product
     public function setUpdatedAt(?\DateTimeImmutable $updated_at): static
     {
         $this->updated_at = $updated_at;
+
+        return $this;
+    }
+
+    public function getModel(): ?Model
+    {
+        return $this->model;
+    }
+
+    public function setModel(?Model $model): static
+    {
+        $this->model = $model;
 
         return $this;
     }

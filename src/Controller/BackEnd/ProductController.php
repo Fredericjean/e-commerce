@@ -5,10 +5,10 @@ namespace App\Controller\Backend;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Attribute\Route;
 
-#[Route('/admin')]
+#[Route('/admin/product')]
 class AdminController extends AbstractController
 {
-    #[Route('/product/create', name:"admin.product.create")]
+    #[Route('', name:".index")]
     public function createProduct ()
     {
         return $this->render('Backend/Product/create.html.twig');
