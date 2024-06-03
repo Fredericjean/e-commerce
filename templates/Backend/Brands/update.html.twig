@@ -1,15 +1,14 @@
-{% extends 'base.html.twig' %}
+{% extends 'Backend/base.html.twig' %}
 
 {% block title %}
-	Modification d'une marque
-	{{ parent() }}
-
+    Modification d'une marque
+    {{ parent() }}
 {% endblock %}
 
 {% block body %}
-	<section >
-		<h1>Modifier une marque</h1>
+    <section class="container mt-5 admin-brands-container">
+        <h1 class="text-center mb-4">Modifier une marque</h1>
         {% include 'Backend/Brands/_form.html.twig' %}
-		<a href="{{path('app.admin.brands.index')}}">Retour à la liste</a>
-	</section>
+        <a href="{{ path('app.admin.brands.index') }}" class="btn btn-secondary mt-3">Retour à la liste</a>
+    </section>
 {% endblock %}

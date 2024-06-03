@@ -6,21 +6,20 @@
 {% endblock %}
 
 {% block body %}
-    <section class="container mt-5">
-        <h1 class="text-center mb-4">Administration des marques </h1>
-        <a href="{{ path('app.admin.brands.create') }}" class="mt-2 btn btn-primary">Créer une marque</a>
+    <section class="container mt-5 admin-brands-container">
+        <h1 class="text-center mb-4">Administration des marques</h1>
+        <a href="{{ path('app.admin.brands.create') }}" class="btn btn-primary create-btn">Créer une marque</a>
         <div class="row">
             {% for brand in brands %}
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="card">
+                    <div class="card h-100">
                         <div class="card-body">
                             <h5 class="card-title">{{ brand.name }}</h5>
-                            <h5 class="card-title">{{ brand.description }}</h5>
-                            <h5 class="card-title">{{ brand.imageName }}</h5>
-                            <h5 class="card-title">{{ brand.createdAt|format_datetime('full','none') }}</h5>
-                            <p class="card-text">{{ brand.enable ? 'Actif': 'Inactif'}}</p>
-                          
-                            <div class="d-flex justify-content-between">
+                            <p class="card-text">{{ brand.description }}</p>
+                            <p class="card-text"><strong>Image :</strong> {{ brand.imageName }}</p>
+                            <p class="card-text"><strong>Date de création :</strong> {{ brand.createdAt ? brand.createdAt|date('d/m/Y H:i:s') : '' }}</p>
+                            <p class="card-text">{{ brand.enable ? 'Actif' : 'Inactif' }}</p>
+                            <div class="d-flex justify-content-between mt-auto">
                                 <a href="{{ path('app.admin.brands.update', { id: brand.id }) }}" class="btn btn-primary">
                                     Modifier
                                 </a>
