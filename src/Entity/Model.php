@@ -15,6 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
     fields: ['name'],
     message: 'Ce nom de marque est déjà utilisé',
 )]
+#[ORM\HasLifecycleCallbacks]
 class Model
 {
     use EnableTrait,
