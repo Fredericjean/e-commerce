@@ -60,7 +60,7 @@ class ModelController extends AbstractController
         $form = $this->createForm(ModelType::class, $model);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()  ) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $this->em->persist($model);
             $this->em->flush();
             $this->addFlash('success', "Modèle de chaussure créé avec succès");
@@ -68,7 +68,7 @@ class ModelController extends AbstractController
             return $this->redirectToRoute('app.admin.models.index');
         }
 
-        return $this->render('Backend/Models/update.html.twig',[
+        return $this->render('Backend/Models/update.html.twig', [
             'form' => $form,
         ]);
     }
@@ -77,8 +77,9 @@ class ModelController extends AbstractController
     public function delete(?Model $model, Request $request): RedirectResponse
     {
         if (!$model) {
-$this->addFlash('error', 'Modèle pas trouvé');
-    return $this->redirectToRoute('app.admin.models.index');
+            $this->addFlash('error', 'Modèle pas trouvé');
+
+            return $this->redirectToRoute('app.admin.models.index');
         }
         if ($this->isCsrfTokenValid('delete' . $model->getId(), $request->request->get('token'))) {
             $this->em->remove($model);
