@@ -6,7 +6,6 @@ use App\Entity\Model;
 use App\Entity\Product;
 use App\Repository\ModelRepository;
 use Doctrine\ORM\QueryBuilder;
-use SebastianBergmann\Type\TrueType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -45,7 +44,7 @@ class ProductType extends AbstractType
                         ->setParameter('enable', true);
                 }
             ])
-            ->add('authenticity', textType::class, [
+            ->add('authenticity', TextType::class, [
                 'label' => 'Authenticité',
                 'required' => false
             ])
