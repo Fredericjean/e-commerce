@@ -19,7 +19,7 @@ class ModelController extends AbstractController
     {
     }
 
-    #[Route('', name: '.index')]
+    #[Route('', name: '.index', methods:['GET'])]
     public function index(ModelRepository $modelRepository): Response
     {
         return $this->render('Backend/Models/index.html.twig', [
