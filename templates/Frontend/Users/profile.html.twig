@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Profil de l'utilisateur
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <h1>Profil de {{ user.email }}</h1>
+    <p>ID: {{ user.id }}</p>
+    <p>Nom: {{ user.firstName }}</p>
+    <p>Email: {{ user.email }}</p>
+    <p>Date d'anniversaire: {{ user.birthDate ? user.birthDate|date('d/m/Y') : 'N/A' }}</p>
+    
+    <h2>Adresses</h2>
+    <ul>
+        {% for adress in user.adresses %}
+            <li>
+                {{ adress.adress }}, {{ adress.city }}, {{ adress.zipCode }}
+                <a href="{{ path('app.users.adress.update', { id: adress.id }) }}" class="btn btn-primary">Modifier</a>
+            </li>
+        {% else %}
+            <li>Aucune adresse trouvée.</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

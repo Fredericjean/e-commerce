@@ -46,11 +46,13 @@
                                     <i class="bi bi-bag"></i>
                                 </a>
                             </li>
+                            {% if is_granted('ROLE_ADMIN') %}
                             <li class="nav-item">
                                 <button id="burger-btn" class="nav-link btn btn-link">
                                     <i class="bi bi-list"></i>
                                 </button>
                             </li>
+                            {% endif %}
                         </ul>
                     </div>
                 </nav>
@@ -69,4 +71,5 @@
             <li><a href="{{path ('app.admin.brands.index')}}">Marques</a></li>
         </ul>
     </div>
+    
 </header>
