@@ -2,10 +2,14 @@
 
 namespace App\Form;
 
+use App\Entity\Brand;
 use App\Entity\Model;
+use App\Entity\Gender;
 use App\Entity\Product;
-use App\Repository\ModelRepository;
 use Doctrine\ORM\QueryBuilder;
+use App\Repository\BrandRepository;
+use App\Repository\ModelRepository;
+use App\Repository\GenderRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -39,9 +43,31 @@ class ProductType extends AbstractType
                 'expanded' => false,
                 'multiple' => false,
                 'query_builder' => function (ModelRepository $modelRepository): QueryBuilder {
+
                     return $modelRepository->createQueryBuilder('m')
                         ->where('m.enable = :enable')
                         ->setParameter('enable', true);
+                }
+            ])
+            ->add('gender', EntityType::class,[
+                'class'=>Gender::class,
+                'choice_label'=>'name',
+                'multiple'=>false,
+                'query_builder'=>function (GenderRepository $genderRepository): QueryBuilder {
+
+                return $genderRepository->createQueryBuilder('m')
+                ->where('m.enable = :enable')
+                ->setParameter('enable', true);
+                }
+            ])
+            ->add('brand', EntityType::class, [
+                'class'=>Brand::class,
+                'choice_label'=>'name',
+                'multiple'=>false,
+                'query_builder'=>function (BrandRepository $brandRepository): QueryBuilder{
+return $brandRepository->createQueryBuilder('m')
+                    ->where('m.enable = :enable')
+                    ->setParameter('enable', true);
                 }
             ])
             ->add('authenticity', TextType::class, [

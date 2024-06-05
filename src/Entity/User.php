@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -69,6 +71,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     )]
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $birth_date = null;
+
+    /**
+     * @var Collection<int, Adress>
+     */
+    #[ORM\ManyToMany(targetEntity: Adress::class, inversedBy: 'users')]
+    private Collection $adresses;
+
+    public function __construct()
+    {
+        $this->adresses = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -189,6 +202,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setBirthDate(?\DateTimeInterface $birth_date): static
     {
         $this->birth_date = $birth_date;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Adress>
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    public function addAdress(Adress $adress): static
+    {
+        if (!$this->adresses->contains($adress)) {
+            $this->adresses->add($adress);
+        }
+
+        return $this;
+    }
+
+    public function removeAdress(Adress $adress): static
+    {
+        $this->adresses->removeElement($adress);
 
         return $this;
     }

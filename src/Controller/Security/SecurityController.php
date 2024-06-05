@@ -1,8 +1,10 @@
 <?php
+
 namespace App\Controller\Security;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,13 +27,18 @@ class SecurityController extends AbstractController
         ]);
     }
 
-    #[Route('/post-login', name: 'app.post_login')]
+    #[Route('/post-login', name: 'app.post_login', methods: ['GET'])]
     public function postLogin(): Response
     {
+        /** @var User $user */
+        $user = $this->getUser();
+
         if ($this->isGranted('ROLE_ADMIN')) {
             return $this->redirectToRoute('app.admin.users.index');
         } else {
-            return $this->redirectToRoute('frontend.home');
+            return $this->redirectToRoute('app.user.profil', [
+                'id' => $user->getId(),
+            ]);
         }
     }
 
@@ -57,6 +64,20 @@ class SecurityController extends AbstractController
 
         return $this->render('Security/register.html.twig', [
             'form' => $form,
+        ]);
+    }
+
+    #[Route('/{id}/profile', name: 'app.user.profil', methods: ['GET'])]
+    public function profile(int $id, UserRepository $userRepository): Response
+    {
+
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            $this->addFlash('error', 'utilisateur pas trouvé');
+        }
+        return $this->render('Frontend/Users/profile.html.twig', [
+            'user' => $user
         ]);
     }
 }

@@ -19,7 +19,7 @@ class BrandController extends AbstractController
     ) {
     }
 
-    #[Route('', name: '.index')]
+    #[Route('', name: '.index', methods:['GET'])]
     public function index(BrandRepository $brandRepository): Response
     {
         return $this->render('Backend/Brands/index.html.twig', [

@@ -19,7 +19,7 @@ class ProductController extends AbstractController
     {
     }
 
-    #[Route('', name: ".index")]
+    #[Route('', name: ".index", methods:['GET'])]
     public function index(ProductRepository $productRepository): Response
     {
 

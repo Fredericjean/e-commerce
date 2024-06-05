@@ -18,7 +18,7 @@ class TaxeController extends AbstractController
     public function __construct (private EntityManagerInterface $em )
     {}
 
-    #[Route('', name: '.index')]
+    #[Route('', name: '.index', methods:['GET'])]
     public function index(TaxeRepository $taxeRepository): Response
     {
 
