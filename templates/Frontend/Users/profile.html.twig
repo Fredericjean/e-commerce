@@ -1,26 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-    Profil de l'utilisateur
+    Modification du profil
     {{ parent() }}
 {% endblock %}
 
 {% block body %}
-    <h1>Profil de {{ user.email }}</h1>
-    <p>ID: {{ user.id }}</p>
-    <p>Nom: {{ user.firstName }}</p>
-    <p>Email: {{ user.email }}</p>
-    <p>Date d'anniversaire: {{ user.birthDate ? user.birthDate|date('d/m/Y') : 'N/A' }}</p>
-    
-    <h2>Adresses</h2>
-    <ul>
-        {% for adress in user.adresses %}
-            <li>
-                {{ adress.adress }}, {{ adress.city }}, {{ adress.zipCode }}
-                <a href="{{ path('app.users.adress.update', { id: adress.id }) }}" class="btn btn-primary">Modifier</a>
-            </li>
-        {% else %}
-            <li>Aucune adresse trouvée.</li>
-        {% endfor %}
-    </ul>
+<div class="profile-wrapper">
+    <div class="profile-container">
+        <h1 class="title text-center">Mes informations</h1>
+        <p class="subtitle text-center">Mettez à jour vos informations personnelles</p>
+        <form action="" method="post">
+            <div class="form-group">
+                <label for="firstName" class="form-label">Prénom:</label>
+                <input type="text" id="firstName" name="firstName" class="form-control" value="{{ user.firstName }}" required />
+            </div>
+            <div class="form-group">
+                <label for="lastName" class="form-label">Nom:</label>
+                <input type="text" id="lastName" name="lastName" class="form-control" value="{{ user.lastName }}" required />
+            </div>
+            <div class="form-group">
+                <label for="birthDate" class="form-label">Date de naissance:</label>
+                <input type="date" id="birthDate" name="birthDate" class="form-control" value="{{ user.birthDate|date('Y-m-d') }}" required />
+            </div>
+            <div class="form-group">
+                <label for="phone" class="form-label">Téléphone:</label>
+                <input type="text" id="phone" name="phone" class="form-control" value="{{ user.telephone }}" required />
+            </div>
+            <div class="form-group">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" id="email" name="email" class="form-control" value="{{ user.email }}" required />
+            </div>
+            <div class="form-group">
+                <label for="password" class="form-label mt-2">Nouveau mot de passe:</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="*****" required />
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword" class="form-label mt-2">Confirmer mot de passe:</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" placeholder="*****" required />
+            </div>
+            <div class="form-group mt-4 text-center">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <button type="submit" class="btn btn-primary btn-block">Mettre à jour mon profil</button>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

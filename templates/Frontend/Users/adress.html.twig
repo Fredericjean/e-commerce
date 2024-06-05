@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Mes adresses
+	{{ parent() }}
+{% endblock %}
+
+{% block body %}
+
+	<h2>Adresses</h2>
+	<ul>
+		{% for adress in user.adresses %}
+			<li>
+				{{user.firtname}},
+                {{user.lastname}}
+			</li>
+			<li>
+				{{ adress.adress }}
+			</li>
+			<li>
+				{{ adress.zipCode }},
+				{{ adress.city }},
+			</li>
+			<a href="{{ path('app.users.adress.update', { id: adress.id }) }}" class="btn btn-primary">Modifier</a>
+		{% else %}
+			<li>Aucune adresse trouvée.</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
