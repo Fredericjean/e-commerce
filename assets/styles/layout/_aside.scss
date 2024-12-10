@@ -1,0 +1,61 @@
+.aside-user {
+    width: 20%;
+    border-right: 1px solid #ddd;
+    padding: 1rem;
+    font-size: 50px;
+
+    .header-aside {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+
+        img {
+            margin-left: -1.2rem;
+            margin-right: 1rem;
+        }
+
+        h2 {
+            margin: 0;
+            font-size: 2rem;
+            color: #333;
+            font-weight: 900;
+        }
+    }
+
+    .aside-list {
+        list-style: none;
+        padding: 0;
+
+        li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+
+            i {
+                margin-right: 2rem;
+                font-size: 1.6rem;
+            }
+
+            a {
+                text-decoration: none;
+                color: #333;
+                font-size: 1.6rem;
+                font-weight: 500;
+
+                &:hover {
+                    color: #007bff;
+                }
+            }
+
+            &.active {
+                background-color: #e9ecef;
+                border-radius: 5px;
+                padding: 0.5rem;
+
+                a {
+                    color: #007bff;
+                }
+            }
+        }
+    }
+}

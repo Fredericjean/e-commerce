@@ -1,0 +1,14 @@
+{% if is_granted("ROLE_USER") %}
+    <aside class="aside-user">
+        <div class="header-aside">
+            <img src="{{ asset('images/banner_brand.png') }}" alt="" width="56px">
+            <h2>Bienvenue {{ user.firstname }}</h2>
+        </div>
+        <ul class="aside-list">
+            <li><i class="bi bi-list"></i><a href="#">Mes commandes</a></li>
+            <li><i class="bi bi-person"></i><a href="{{path('app.user.profil',{ id: user.id })}}">Mes informations</a></li>
+            <li><i class="bi bi-box-seam"></i><a href="#">Mes adresses</a></li>
+            <li><i class="bi bi-box-arrow-right"></i><a href="#">Se déconnecter</a></li>
+        </ul>
+    </aside>
+{% endif %}

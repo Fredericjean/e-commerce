@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Delivery index{% endblock %}
+
+{% block body %}
+    <h1>Delivery index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Enable</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for delivery in deliveries %}
+            <tr>
+                <td>{{ delivery.id }}</td>
+                <td>{{ delivery.name }}</td>
+                <td>{{ delivery.description }}</td>
+                <td>{{ delivery.price }}</td>
+                <td>{{ delivery.enable ? 'Yes' : 'No' }}</td>
+                <td>
+                    <a href="{{ path('app_delivery_show', {'id': delivery.id}) }}">show</a>
+                    <a href="{{ path('app_delivery_edit', {'id': delivery.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="6">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_delivery_new') }}">Create new</a>
+{% endblock %}

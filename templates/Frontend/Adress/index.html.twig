@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    Administration des Adresses
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+<div class="red-string">
+<p>Accueil</p>
+<p>Compte</p>
+<p>adresses</p>
+
+</div>
+
+    <section class="container mt-5 user-brands-container">
+    <div class="header">
+        <h1 class="text-center mb-4">Mes adresses</h1>
+        <a href="{{ path('app.users.adress.create') }}" class="btn btn-primary create-btn">Créer une adresse</a>
+    </div>
+        <div class="row">
+            {% for oneAdress in adresses %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ oneAdress.adress }}</h5>
+                            <p class="card-text">{{ oneAdress.zipCode }}</p>
+                            <p class="card-text"> {{ oneAdress.city }}</p>
+                            <div class="d-flex justify-content-between mt-auto">
+                                <a href="{{ path('app.users.adress.update', { id: oneAdress.id }) }}" class="btn btn-primary">
+                                    Modifier
+                                </a>
+                                {% include 'Frontend/Adress/_deleteForm.html.twig' %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}
